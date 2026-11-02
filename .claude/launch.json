@@ -2,9 +2,9 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "website",
+      "name": "docs",
       "runtimeExecutable": "python",
-      "runtimeArgs": ["-m", "http.server", "5173", "--directory", "website"],
+      "runtimeArgs": ["-m", "http.server", "5173", "--directory", "docs"],
       "port": 5173
     }
   ]
