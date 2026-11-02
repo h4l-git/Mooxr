@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="en" data-theme="mint" data-mode="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mooxr · Video in, tagged MP3 out</title>
+  <meta name="description" content="Drop a video or paste a link. Mooxr makes a tagged 320 kbps MP3 with cover art and puts it straight into Spotify Local Files. Desktop app for Windows plus a Chrome extension.">
+  <meta name="theme-color" content="#0D1410">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/icon.png" type="image/png">
+  <link rel="stylesheet" href="styles.css">
+  <script>
+    // Apply the saved look before the page paints, so it never flashes.
+    try {
+      var t = localStorage.getItem("mooxr-site-theme"), m = localStorage.getItem("mooxr-site-mode");
+      if (t) document.documentElement.dataset.theme = t;
+      if (m) document.documentElement.dataset.mode = m;
+    } catch (e) {}
+    document.documentElement.classList.add("js");
+  </script>
+</head>
+<body>
+
+<!-- ============================== Nav ============================== -->
+<header class="nav" id="top">
+  <div class="wrap nav-inner">
+    <a class="brand" href="#top" aria-label="Mooxr home">
+      <svg class="wordmark" viewBox="0 0 470 140" aria-hidden="true">
+        <defs><linearGradient id="g-nav" x1="130" y1="0" x2="310" y2="130" gradientUnits="userSpaceOnUse"><stop offset="0" class="stop-from"/><stop offset="1" class="stop-to"/></linearGradient></defs>
+        <g transform="translate(12 6)"><g class="letters" fill="none" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"><path d="M20 120V80a20 20 0 0 1 40 0v40M60 80a20 20 0 0 1 40 0v40"/><path d="M333 60l48 60M381 60l-48 60"/><path d="M408 120V90a30 30 0 0 1 30-30h4"/></g><g fill="none" stroke="url(#g-nav)" stroke-linecap="round"><path d="M132 88V84A87.0 74.82 0 0 1 306 84v4" stroke-width="10"/><circle cx="170" cy="90" r="30" stroke-width="14"/><circle cx="268" cy="90" r="30" stroke-width="14"/><path d="M142.1 109.5A34 34 0 0 1 142.1 70.5" stroke-width="22"/><path d="M295.9 70.5A34 34 0 0 1 295.9 109.5" stroke-width="22"/></g></g>
+      </svg>
+    </a>
+    <nav class="nav-links" id="nav-links" aria-label="Main">
+      <a href="#how">How it works</a>
+      <a href="#extension">Extension</a>
+      <a href="#features">Features</a>
+      <a href="#themes">Themes</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="icon-btn" id="mode-toggle" type="button" aria-label="Switch light or dark">
+        <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>
+      </button>
+      <a class="btn btn-primary btn-sm" href="#download">Download</a>
+      <button class="icon-btn menu-btn" id="menu-btn" type="button" aria-label="Menu" aria-expanded="false" aria-controls="nav-links">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ============================== Hero ============================== -->
+<section class="hero">
+  <div class="glow" aria-hidden="true"></div>
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="eyebrow"><span class="dot"></span> Desktop app for Windows · Chrome extension</p>
+      <h1>Video in.<br><span class="grad-text">Tagged MP3 out.</span></h1>
+      <p class="lede">Drop a video or paste a link. Mooxr makes a 320&nbsp;kbps MP3 with the title, artist and cover art filled in, and puts it straight into Spotify&rsquo;s Local Files.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="https://github.com/h4l-git/Mooxr/releases/latest">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5M5 21h14"/></svg>
+          Download for Windows
+        </a>
+        <a class="btn" href="#extension">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.5"/><path d="M12 8.5h8.5M9 13.8L4.8 6.4M15 13.8l-4.3 7.4"/></svg>
+          Get the extension
+        </a>
+      </div>
+      <p class="fine">One file, about 50&nbsp;MB. Nothing to install.</p>
+    </div>
+
+    <!-- App window mock-up, animated by script.js -->
+    <div class="window" aria-label="The Mooxr window converting three videos" role="img">
+      <div class="win-bar">
+        <span class="win-title">Mooxr</span>
+        <span class="win-ctrls" aria-hidden="true"><i></i><i></i><i></i></span>
+      </div>
+      <div class="win-body">
+        <div class="win-head">
+          <div>
+            <div class="win-brand">
+              <svg class="wordmark sm" viewBox="0 0 470 140" aria-hidden="true">
+                <defs><linearGradient id="g-mock" x1="130" y1="0" x2="310" y2="130" gradientUnits="userSpaceOnUse"><stop offset="0" class="stop-from"/><stop offset="1" class="stop-to"/></linearGradient></defs>
+                <g transform="translate(12 6)"><g class="letters" fill="none" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"><path d="M20 120V80a20 20 0 0 1 40 0v40M60 80a20 20 0 0 1 40 0v40"/><path d="M333 60l48 60M381 60l-48 60"/><path d="M408 120V90a30 30 0 0 1 30-30h4"/></g><g fill="none" stroke="url(#g-mock)" stroke-linecap="round"><path d="M132 88V84A87.0 74.82 0 0 1 306 84v4" stroke-width="10"/><circle cx="170" cy="90" r="30" stroke-width="14"/><circle cx="268" cy="90" r="30" stroke-width="14"/><path d="M142.1 109.5A34 34 0 0 1 142.1 70.5" stroke-width="22"/><path d="M295.9 70.5A34 34 0 0 1 295.9 109.5" stroke-width="22"/></g></g>
+              </svg>
+              <span class="byline">By h4l.dev</span>
+            </div>
+            <div class="win-sub">Video in, tagged MP3 out - ready for Spotify Local Files.</div>
+          </div>
+          <span class="pill-btn">Settings</span>
+        </div>
+
+        <div class="win-drop">Drop more videos here</div>
+
+        <div class="rows">
+          <div class="row" data-row>
+            <div class="cover c1" aria-hidden="true"></div>
+            <div class="row-main">
+              <div class="row-src">youtube.com/watch?v=…</div>
+              <div class="fields"><span class="field">Midnight Drive</span><span class="field">Neon Harbour</span></div>
+              <div class="bar"><span></span></div>
+              <div class="status">Waiting</div>
+            </div>
+          </div>
+          <div class="row" data-row>
+            <div class="cover c2" aria-hidden="true"></div>
+            <div class="row-main">
+              <div class="row-src">My Band - First Song.mp4</div>
+              <div class="fields"><span class="field">First Song</span><span class="field">My Band</span></div>
+              <div class="bar"><span></span></div>
+              <div class="status">Waiting</div>
+            </div>
+          </div>
+          <div class="row" data-row>
+            <div class="cover c3" aria-hidden="true"></div>
+            <div class="row-main">
+              <div class="row-src">summer-set (Official Video) [HD].mov</div>
+              <div class="fields"><span class="field">Summer Set</span><span class="field">Unknown Artist</span></div>
+              <div class="bar"><span></span></div>
+              <div class="status">Waiting</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="win-foot">
+          <span class="save-to">Save to <b>Music\Spotify</b></span>
+          <span class="moox-pill"><span class="moox-main" id="moox-label">Moox all 3</span><span class="moox-send">to Spotify ▾</span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== Works with ============================== -->
+<section class="services" aria-label="Music apps Mooxr sends tracks to">
+  <div class="wrap services-inner">
+    <span class="services-label">Sends finished tracks to</span>
+    <ul class="service-list">
+      <li><img src="assets/services/spotify.svg" alt="" width="22" height="22">Spotify</li>
+      <li><img src="assets/services/apple_music.svg" alt="" width="22" height="22">Apple Music</li>
+      <li><img src="assets/services/youtube_music.svg" alt="" width="22" height="22">YouTube Music</li>
+      <li><img src="assets/services/deezer.svg" alt="" width="22" height="22">Deezer</li>
+      <li><img src="assets/services/soundcloud.svg" alt="" width="22" height="22">SoundCloud</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============================== How it works ============================== -->
+<section class="section" id="how">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="kicker">How it works</p>
+      <h2>Three steps. Mostly one button.</h2>
+    </div>
+    <ol class="steps">
+      <li class="card step reveal">
+        <span class="step-num">1</span>
+        <h3>Drop it in</h3>
+        <p>Drag videos or a whole folder onto the window, paste a link, or press <kbd>Ctrl</kbd>+<kbd>V</kbd> anywhere. Mooxr guesses the title and artist for you.</p>
+      </li>
+      <li class="card step reveal">
+        <span class="step-num">2</span>
+        <h3>Press Moox</h3>
+        <p>Files convert one at a time in the background. Cancel one, retry a failed one, keep adding more while it works.</p>
+      </li>
+      <li class="card step reveal">
+        <span class="step-num">3</span>
+        <h3>Play it in Spotify</h3>
+        <p>Each MP3 lands in your Spotify folder and shows up under <b>Your Library → Local Files</b> by itself.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============================== Extension ============================== -->
+<section class="section alt" id="extension">
+  <div class="wrap split">
+    <div class="split-copy reveal">
+      <p class="kicker">Chrome extension</p>
+      <h2>Moox it from the page you&rsquo;re on.</h2>
+      <p class="lede sm">Watching something you want to keep? One click sends the link to Mooxr. If the window is closed it opens; if it&rsquo;s already open, the link joins the queue.</p>
+      <ul class="ticks">
+        <li>Sends the current page straight to the Mooxr window</li>
+        <li>Shares the app&rsquo;s settings both ways: theme, light or dark, Spotify folder</li>
+        <li>Change something in Chrome and the app picks it up the moment you switch back</li>
+      </ul>
+      <div class="cta-row">
+        <!-- TODO: swap in the Chrome Web Store link once it's listed -->
+        <a class="btn btn-primary" href="https://github.com/h4l-git/Mooxr">Add to Chrome</a>
+        <span class="fine">Needs the Mooxr app on the same PC.</span>
+      </div>
+    </div>
+
+    <div class="browser reveal" aria-label="The Mooxr extension open in Chrome" role="img">
+      <div class="br-bar">
+        <span class="br-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="br-url">youtube.com/watch?v=…</span>
+        <span class="br-ext" aria-hidden="true">
+          <svg viewBox="0 0 256 256"><defs><linearGradient id="g-ext" x1="30" y1="40" x2="226" y2="220" gradientUnits="userSpaceOnUse"><stop offset="0" class="stop-from"/><stop offset="1" class="stop-to"/></linearGradient></defs><g fill="none" stroke="url(#g-ext)" stroke-linecap="round"><path d="M41 152V148A87.0 74.82 0 0 1 215 148v4" stroke-width="13"/><circle cx="80" cy="154" r="31" stroke-width="17"/><circle cx="176" cy="154" r="31" stroke-width="17"/><path d="M51.3 174.1A35 35 0 0 1 51.3 133.9" stroke-width="26"/><path d="M204.7 133.9A35 35 0 0 1 204.7 174.1" stroke-width="26"/></g></svg>
+        </span>
+      </div>
+      <div class="br-page">
+        <div class="video" aria-hidden="true"><span class="play"></span></div>
+        <div class="vline w70"></div>
+        <div class="vline w40"></div>
+
+        <div class="popup">
+          <div class="pop-head">
+            <svg class="mark" viewBox="0 0 256 256" aria-hidden="true"><defs><linearGradient id="g-pop" x1="30" y1="40" x2="226" y2="220" gradientUnits="userSpaceOnUse"><stop offset="0" class="stop-from"/><stop offset="1" class="stop-to"/></linearGradient></defs><g fill="none" stroke="url(#g-pop)" stroke-linecap="round"><path d="M41 152V148A87.0 74.82 0 0 1 215 148v4" stroke-width="13"/><circle cx="80" cy="154" r="31" stroke-width="17"/><circle cx="176" cy="154" r="31" stroke-width="17"/><path d="M51.3 174.1A35 35 0 0 1 51.3 133.9" stroke-width="26"/><path d="M204.7 133.9A35 35 0 0 1 204.7 174.1" stroke-width="26"/></g></svg>
+            <b>Mooxr</b>
+            <span class="pop-gear" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12.2 2h-.4a2 2 0 0 0-2 2v.2a2 2 0 0 1-1 1.7l-.4.2a2 2 0 0 1-2 0l-.2-.1a2 2 0 0 0-2.7.7l-.2.4a2 2 0 0 0 .7 2.7l.2.1a2 2 0 0 1 1 1.7v.5a2 2 0 0 1-1 1.8l-.2.1a2 2 0 0 0-.7 2.7l.2.4a2 2 0 0 0 2.7.7l.2-.1a2 2 0 0 1 2 0l.4.3a2 2 0 0 1 1 1.7v.2a2 2 0 0 0 2 2h.4a2 2 0 0 0 2-2v-.2a2 2 0 0 1 1-1.7l.4-.3a2 2 0 0 1 2 0l.2.1a2 2 0 0 0 2.7-.7l.2-.4a2 2 0 0 0-.7-2.7l-.2-.1a2 2 0 0 1-1-1.8v-.5a2 2 0 0 1 1-1.7l.2-.1a2 2 0 0 0 .7-2.7l-.2-.4a2 2 0 0 0-2.7-.7l-.2.1a2 2 0 0 1-2 0l-.4-.2a2 2 0 0 1-1-1.7V4a2 2 0 0 0-2-2z"/></svg></span>
+          </div>
+          <div class="pop-track">
+            <div class="cover c1" aria-hidden="true"></div>
+            <div><b>Midnight Drive</b><span>Neon Harbour</span></div>
+          </div>
+          <span class="pop-btn">Moox this video</span>
+          <span class="pop-note">Sent to Mooxr <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7"/></svg></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== Features ============================== -->
+<section class="section" id="features">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="kicker">What it decides for you</p>
+      <h2>The fiddly bits, handled.</h2>
+      <p class="lede sm center">Leave the boxes empty and Mooxr works it out. Type over anything you want to change.</p>
+    </div>
+    <div class="features">
+      <article class="card feature reveal">
+        <span class="f-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7V5h16v2M9 19h6M12 5v14"/></svg></span>
+        <h3>Title and artist, filled in</h3>
+        <p>From the link&rsquo;s details, the file&rsquo;s own tags, or a name like <code>Artist - Title</code>. The grey text shows its guess before you start.</p>
+      </article>
+      <article class="card feature reveal">
+        <span class="f-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg></span>
+        <h3>Cover art that fits</h3>
+        <p>The video&rsquo;s thumbnail or a frame from it, cropped to a square JPEG up to 3000&times;3000, which is what Spotify wants. Or pick your own.</p>
+      </article>
+      <article class="card feature reveal">
+        <span class="f-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M7 12h10M10 18h4"/></svg></span>
+        <h3>Titles without the clutter</h3>
+        <p><s>(Official Video)</s>, <s>[HD]</s> and <s>(Lyrics)</s> come off. <b>(feat.&nbsp;X)</b> and <b>(Live)</b> stay.</p>
+      </article>
+      <article class="card feature reveal">
+        <span class="f-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></span>
+        <h3>320&nbsp;kbps MP3</h3>
+        <p>44.1&nbsp;kHz stereo, saved as <code>Artist - Title.mp3</code> in an album called <i>Mooxed</i> so everything groups together.</p>
+      </article>
+      <article class="card feature reveal">
+        <span class="f-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></span>
+        <h3>Mooxed files library</h3>
+        <p>Every track you&rsquo;ve made, with its cover. Search, sort, fix a title, swap the art; the Spotify copy updates to match.</p>
+      </article>
+      <article class="card feature reveal">
+        <span class="f-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg></span>
+        <h3>No repeats, no half files</h3>
+        <p>Already mooxed something? You&rsquo;re told when you add it. Stop mid-way and nothing half-written is left behind.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== Themes ============================== -->
+<section class="section alt" id="themes">
+  <div class="wrap split">
+    <div class="split-copy reveal">
+      <p class="kicker">Appearance</p>
+      <h2>Six colours. Dark or light.</h2>
+      <p class="lede sm">Settings → Appearance in the app or the extension. Try them here; this page changes too.</p>
+      <div class="segment" role="radiogroup" aria-label="Mode">
+        <button type="button" role="radio" data-mode-btn="dark">Dark</button>
+        <button type="button" role="radio" data-mode-btn="light">Light</button>
+        <button type="button" role="radio" data-mode-btn="system">System</button>
+      </div>
+    </div>
+    <div class="swatches reveal" role="radiogroup" aria-label="Colour theme">
+      <button type="button" role="radio" class="swatch" data-theme-btn="mint"   style="--sf:#5EEB8E;--st:#14B866"><i></i><b>Mint</b><span>The original</span></button>
+      <button type="button" role="radio" class="swatch" data-theme-btn="ocean"  style="--sf:#6FD3FF;--st:#2A8CF0"><i></i><b>Ocean</b><span>Cool blue</span></button>
+      <button type="button" role="radio" class="swatch" data-theme-btn="grape"  style="--sf:#D0A8FF;--st:#9B6CFF"><i></i><b>Grape</b><span>Soft violet</span></button>
+      <button type="button" role="radio" class="swatch" data-theme-btn="rose"   style="--sf:#FFA3CF;--st:#F0508F"><i></i><b>Rose</b><span>Warm pink</span></button>
+      <button type="button" role="radio" class="swatch" data-theme-btn="sunset" style="--sf:#FFB36B;--st:#FF6A5C"><i></i><b>Sunset</b><span>Orange glow</span></button>
+      <button type="button" role="radio" class="swatch" data-theme-btn="gold"   style="--sf:#FFE27A;--st:#F5A623"><i></i><b>Gold</b><span>Bright amber</span></button>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== Spotify setup ============================== -->
+<section class="section" id="spotify">
+  <div class="wrap">
+    <div class="setup card reveal">
+      <div class="setup-copy">
+        <img src="assets/services/spotify.svg" alt="" width="40" height="40">
+        <h2>One-time Spotify setup</h2>
+        <p>Spotify doesn&rsquo;t let other apps hand it songs; it watches folders. Point it at Mooxr&rsquo;s folder once and every track appears by itself.</p>
+      </div>
+      <ol class="setup-steps">
+        <li>In Spotify, open <b>Settings → Your Library</b></li>
+        <li>Turn on <b>Show Local Files</b></li>
+        <li>Press <b>Add a source</b> and choose <code>Music\Spotify</code></li>
+        <li>Find your tracks under <b>Your Library → Local Files</b></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== FAQ ============================== -->
+<section class="section alt" id="faq">
+  <div class="wrap narrow">
+    <div class="section-head reveal">
+      <p class="kicker">Questions</p>
+      <h2>Good to know</h2>
+    </div>
+    <div class="faq">
+      <details class="reveal">
+        <summary>What does Mooxr need to run?</summary>
+        <p>A Windows PC. Mooxr.exe has everything packed inside. The first time you open it, it offers to fetch FFmpeg (the tool that does the converting, about 115&nbsp;MB) and checks the download before using it.</p>
+      </details>
+      <details class="reveal">
+        <summary>My antivirus asked about Mooxr.exe. Is that normal?</summary>
+        <p>Some antivirus tools are wary of new, unsigned programs and ask before running them. The first launch also takes a few seconds while Windows unpacks the file.</p>
+      </details>
+      <details class="reveal">
+        <summary>Which music apps can it send to?</summary>
+        <p>Spotify and Apple Music pick tracks up from a folder automatically. YouTube Music, Deezer and SoundCloud only take uploads on their websites, so Mooxr opens the upload page and shows you the file to drag in. Tidal and Amazon Music don&rsquo;t accept your own files.</p>
+      </details>
+      <details class="reveal">
+        <summary>Why did a renamed track drop out of my playlists?</summary>
+        <p>Spotify recognises a local file by its title, artist, album and length. Change the title or artist and it&rsquo;s a new song to Spotify, so add it again. Mooxr warns you before you save. A new cover is fine.</p>
+      </details>
+      <details class="reveal">
+        <summary>Do I need the extension?</summary>
+        <p>No. The app works on its own with files and pasted links. The extension just saves you copying the link across.</p>
+      </details>
+      <details class="reveal">
+        <summary>Is there a command line?</summary>
+        <p>Yes: <code>python -m mooxr "My Band - First Song.mp4"</code>. Add <code>--title</code>, <code>--artist</code> or <code>--out</code> as needed. It can be used from Python code too.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== Download ============================== -->
+<section class="section" id="download">
+  <div class="wrap">
+    <div class="cta-band reveal">
+      <svg class="cta-mark" viewBox="0 0 256 256" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-linecap="round"><path d="M41 152V148A87.0 74.82 0 0 1 215 148v4" stroke-width="13"/><circle cx="80" cy="154" r="31" stroke-width="17"/><circle cx="176" cy="154" r="31" stroke-width="17"/><path d="M51.3 174.1A35 35 0 0 1 51.3 133.9" stroke-width="26"/><path d="M204.7 133.9A35 35 0 0 1 204.7 174.1" stroke-width="26"/></g></svg>
+      <h2>Ready to moox?</h2>
+      <p>Download Mooxr.exe, double-click it, drop in a video.</p>
+      <div class="cta-row center">
+        <a class="btn btn-ink" href="https://github.com/h4l-git/Mooxr/releases/latest">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5M5 21h14"/></svg>
+          Download for Windows
+        </a>
+        <a class="btn btn-ghost-ink" href="https://github.com/h4l-git/Mooxr">View on GitHub</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============================== Footer ============================== -->
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <div>
+      <svg class="wordmark sm" viewBox="0 0 470 140" aria-label="Mooxr" role="img">
+        <defs><linearGradient id="g-foot" x1="130" y1="0" x2="310" y2="130" gradientUnits="userSpaceOnUse"><stop offset="0" class="stop-from"/><stop offset="1" class="stop-to"/></linearGradient></defs>
+        <g transform="translate(12 6)"><g class="letters" fill="none" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"><path d="M20 120V80a20 20 0 0 1 40 0v40M60 80a20 20 0 0 1 40 0v40"/><path d="M333 60l48 60M381 60l-48 60"/><path d="M408 120V90a30 30 0 0 1 30-30h4"/></g><g fill="none" stroke="url(#g-foot)" stroke-linecap="round"><path d="M132 88V84A87.0 74.82 0 0 1 306 84v4" stroke-width="10"/><circle cx="170" cy="90" r="30" stroke-width="14"/><circle cx="268" cy="90" r="30" stroke-width="14"/><path d="M142.1 109.5A34 34 0 0 1 142.1 70.5" stroke-width="22"/><path d="M295.9 70.5A34 34 0 0 1 295.9 109.5" stroke-width="22"/></g></g>
+      </svg>
+      <p class="muted">By h4l.dev · &copy; <span id="year">2026</span></p>
+    </div>
+    <p class="legal muted">Spotify, Apple Music, YouTube Music, Deezer and SoundCloud are trademarks of their owners; their icons only show where Mooxr can send a track. Only convert and upload music you have the rights to.</p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
