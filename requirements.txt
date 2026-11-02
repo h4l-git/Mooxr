@@ -1,0 +1,4 @@
+mutagen>=1.47
+PyQt6>=6.5      # the window
+yt-dlp          # only needed for links
+pytest          # only needed to run the tests
