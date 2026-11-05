@@ -486,16 +486,17 @@ h2 { font-size: clamp(32px, 4.2vw, 50px); font-weight: 900; }
 .policy-hero { padding: 72px 0 8px; }
 .policy-hero h1 { font-size: clamp(38px, 5vw, 58px); font-weight: 900; letter-spacing: -.03em; margin: 14px 0 14px; }
 .policy { padding: 40px 0 104px; }
-.policy .summary { padding: 28px 30px; margin-bottom: 52px; }
+.policy .summary { padding: 28px 30px; margin-bottom: 80px; }
 .policy .summary h2 { margin-bottom: 4px; }
 .policy .summary .ticks { margin-top: 18px; padding-left: 0; gap: 12px; }
-.policy section + section { margin-top: 48px; }
-.policy h2 { font-size: 26px; font-weight: 800; letter-spacing: -.015em; margin-bottom: 14px; }
-.policy h3 { font-size: 18px; font-weight: 800; margin: 26px 0 8px; }
+.policy section + section { margin-top: 80px; }
+.policy h2 { font-size: 26px; font-weight: 800; letter-spacing: -.015em; margin-bottom: 20px; }
+.policy h3 { font-size: 18px; font-weight: 800; margin: 40px 0 12px; }
+.policy h2 + h3 { margin-top: 28px; }
 .policy p, .policy li { color: var(--muted); }
-.policy p + p, .policy p + ul, .policy ul + p { margin-top: 12px; }
+.policy p + p, .policy p + ul, .policy ul + p, .policy .perms + p { margin-top: 18px; }
 .policy b, .policy strong { color: var(--text); }
-.policy ul { padding-left: 22px; display: grid; gap: 8px; margin: 0; }
+.policy ul { padding-left: 22px; display: grid; gap: 12px; margin: 0; }
 .policy a:not(.btn) { color: var(--strong); text-decoration: underline; text-underline-offset: 3px; }
 .perms { display: grid; gap: 10px; margin-top: 16px; }
 .perm { display: grid; grid-template-columns: 170px 1fr; gap: 16px; padding: 14px 18px; border: 1px solid var(--border); border-radius: 14px; background: var(--surface); }
@@ -503,7 +504,8 @@ h2 { font-size: clamp(32px, 4.2vw, 50px); font-weight: 900; }
 .perm p { margin: 0; }
 @media (max-width: 680px) {
   .policy-hero { padding: 48px 0 4px; }
-  .policy .summary { padding: 22px; }
+  .policy .summary { padding: 22px; margin-bottom: 64px; }
+  .policy section + section { margin-top: 64px; }
   .perm { grid-template-columns: 1fr; gap: 6px; }
 }
 
