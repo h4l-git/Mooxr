@@ -8,6 +8,7 @@ the stylesheet uses, so a new theme is one line in THEMES.
 from __future__ import annotations
 
 import tempfile
+import xml.etree.ElementTree as ET
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Dict, Optional
@@ -256,6 +257,44 @@ def logo_pixmap(c: Dict[str, str], height: int, mark_only: bool = False) -> Opti
         return None
     svg = svg.replace(_LOGO_FROM, c["grad_from"]).replace(_LOGO_TO, c["grad_to"]).replace(_LOGO_LETTERS, c["text"])
     return _render(svg, height)
+
+
+# The wordmark's pieces, by the ids in its SVG. Each is drawn on its own
+# full-size canvas so they stack back into the whole logo.
+_LOGO_PARTS = {"letters": {"letters"}, "band": {"band"}, "ear_l": {"cup-l", "pad-l"}, "ear_r": {"cup-r", "pad-r"}}
+_SVG_NS = "http://www.w3.org/2000/svg"
+
+
+def logo_parts(c: Dict[str, str], height: int) -> Optional[Dict[str, QPixmap]]:
+    """The wordmark in theme colours, split into letters, headband and each ear, or None."""
+    try:
+        svg = WORDMARK.read_text(encoding="utf-8")
+    except OSError:
+        return None
+    svg = svg.replace(_LOGO_FROM, c["grad_from"]).replace(_LOGO_TO, c["grad_to"]).replace(_LOGO_LETTERS, c["text"])
+    every_id = set().union(*_LOGO_PARTS.values())
+    ET.register_namespace("", _SVG_NS)
+    parts: Dict[str, QPixmap] = {}
+    for name, keep in _LOGO_PARTS.items():
+        try:
+            root = ET.fromstring(svg)
+        except ET.ParseError:
+            return None
+        found = set()
+        for parent in list(root.iter()):
+            for child in list(parent):
+                part_id = child.get("id")
+                if part_id in every_id:
+                    found.add(part_id)
+                    if part_id not in keep:
+                        parent.remove(child)
+        if found != every_id:  # an older SVG without the ids
+            return None
+        pixmap = _render(ET.tostring(root, encoding="unicode"), height)
+        if pixmap is None:
+            return None
+        parts[name] = pixmap
+    return parts
 
 
 def icon_pixmap(name: str, colour: str, size: int) -> Optional[QPixmap]:

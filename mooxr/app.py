@@ -46,7 +46,8 @@ from PyQt6.QtWidgets import (
 from . import art, frame, library, services, tools
 from .core import DEFAULT_OUT_DIR, Moox, MooxCancelled, MooxError, check_art, guess_tags, is_link, moox
 from .settings import SettingsPage, SpotifyPage
-from .theme import Appearance, icon_pixmap, logo_pixmap, service_pixmap
+from .logo import LogoButton
+from .theme import Appearance, icon_pixmap, logo_parts, service_pixmap
 
 MEDIA_EXTENSIONS = {
     ".mp4", ".mov", ".mkv", ".webm", ".avi", ".wmv", ".flv", ".m4v", ".mpg", ".mpeg", ".3gp", ".ts",
@@ -1062,9 +1063,8 @@ class Window(QMainWindow):
         header = QHBoxLayout()
         words = QVBoxLayout()
         words.setSpacing(4)
-        self.logo = QLabel()
+        self.logo = LogoButton()  # opens the website; the headphones groove on hover
         self.logo.setObjectName("title")
-        self.logo.setToolTip("Mooxr")
         subtitle = QLabel("Video in, tagged MP3 out - ready for Spotify Local Files.")
         subtitle.setObjectName("subtitle")
         byline = QLabel("By h4l.dev")
@@ -1464,11 +1464,7 @@ class Window(QMainWindow):
     def _draw_theme_art(self) -> None:
         """Redraw the logo and icons in the current theme's colours."""
         c = self.appearance.colours
-        pixmap = logo_pixmap(c, 46)
-        if pixmap is None:
-            self.logo.setText("Mooxr")
-        else:
-            self.logo.setPixmap(pixmap)
+        self.logo.set_parts(logo_parts(c, 46), c["accent"])
         gear = icon_pixmap("gear", c["text"], 16)
         if gear is not None:
             self.settings_button.setIcon(QIcon(gear))
