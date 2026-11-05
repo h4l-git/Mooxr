@@ -113,8 +113,27 @@ code, kbd {
 .stop-from { stop-color: var(--from); }
 .stop-to { stop-color: var(--to); }
 .wordmark .letters { stroke: var(--text); transition: stroke .35s ease; }
-.wordmark { height: 34px; width: auto; }
+.wordmark { height: 34px; width: auto; overflow: visible; }
 .wordmark.sm { height: 26px; }
+
+/* Nav logo: on hover the headphones rock side to side, bob up at each end
+   and the ear cups thump on the beat (same as the app and extension).
+   Lengths inside the SVG are in its viewBox units (140 tall). */
+.brand .phones { transform-box: fill-box; transform-origin: 50% 80%; }
+.brand .ear { transform-box: fill-box; }
+.brand .ear-l { transform-origin: 53% 50%; }
+.brand .ear-r { transform-origin: 47% 50%; }
+.brand:hover .phones, .brand:focus-visible .phones { animation: groove .9s ease-in-out infinite; }
+.brand:hover .ear, .brand:focus-visible .ear { animation: thump .45s ease-out infinite; }
+@keyframes groove {
+  0%, 50%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-5px) rotate(-6deg); }
+  75% { transform: translateY(-5px) rotate(6deg); }
+}
+@keyframes thump {
+  0% { transform: scale(1.1); }
+  30%, 100% { transform: scale(1); }
+}
 
 /* ---------- Buttons (pill shapes from the app) ---------- */
 .btn {
@@ -460,6 +479,33 @@ h2 { font-size: clamp(32px, 4.2vw, 50px); font-weight: 900; }
 .footer-inner { display: flex; justify-content: space-between; align-items: flex-start; gap: 32px; flex-wrap: wrap; }
 .footer-inner p { font-size: 14px; margin-top: 10px; }
 .legal { max-width: 520px; }
+.footer a { text-decoration: underline; text-underline-offset: 3px; }
+.footer a:hover { color: var(--strong); }
+
+/* Privacy policy page */
+.policy-hero { padding: 72px 0 8px; }
+.policy-hero h1 { font-size: clamp(38px, 5vw, 58px); font-weight: 900; letter-spacing: -.03em; margin: 14px 0 14px; }
+.policy { padding: 40px 0 104px; }
+.policy .summary { padding: 28px 30px; margin-bottom: 52px; }
+.policy .summary h2 { margin-bottom: 4px; }
+.policy .summary .ticks { margin-top: 18px; padding-left: 0; gap: 12px; }
+.policy section + section { margin-top: 48px; }
+.policy h2 { font-size: 26px; font-weight: 800; letter-spacing: -.015em; margin-bottom: 14px; }
+.policy h3 { font-size: 18px; font-weight: 800; margin: 26px 0 8px; }
+.policy p, .policy li { color: var(--muted); }
+.policy p + p, .policy p + ul, .policy ul + p { margin-top: 12px; }
+.policy b, .policy strong { color: var(--text); }
+.policy ul { padding-left: 22px; display: grid; gap: 8px; margin: 0; }
+.policy a:not(.btn) { color: var(--strong); text-decoration: underline; text-underline-offset: 3px; }
+.perms { display: grid; gap: 10px; margin-top: 16px; }
+.perm { display: grid; grid-template-columns: 170px 1fr; gap: 16px; padding: 14px 18px; border: 1px solid var(--border); border-radius: 14px; background: var(--surface); }
+.perm-name { display: flex; flex-wrap: wrap; gap: 6px; align-content: start; align-items: center; font-weight: 700; color: var(--text); }
+.perm p { margin: 0; }
+@media (max-width: 680px) {
+  .policy-hero { padding: 48px 0 4px; }
+  .policy .summary { padding: 22px; }
+  .perm { grid-template-columns: 1fr; gap: 6px; }
+}
 
 /* Scroll reveal (only when JS is running) */
 .js .reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s ease, border-color .25s, background-color .35s; }
@@ -512,4 +558,5 @@ h2 { font-size: clamp(32px, 4.2vw, 50px); font-weight: 900; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
   .js .reveal { opacity: 1; transform: none; }
+  .brand .phones, .brand .ear { animation: none !important; }
 }

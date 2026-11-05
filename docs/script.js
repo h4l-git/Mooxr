@@ -95,6 +95,7 @@
 
   // ---------- Hero demo: three rows moox one after another ----------
   var win = document.querySelector(".window");
+  if (!win) return;  // pages without the demo, like the privacy policy
   var rows = Array.prototype.slice.call(document.querySelectorAll("[data-row]"));
   var label = document.getElementById("moox-label");
   var stages = [
