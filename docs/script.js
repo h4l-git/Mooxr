@@ -1,4 +1,4 @@
-// Mooxr website: theme picker, mobile menu, scroll reveal and the hero demo.
+// Mooxr website: light/dark toggle, mobile menu, scroll reveal and the hero demo.
 (function () {
   "use strict";
   var root = document.documentElement;
@@ -8,49 +8,27 @@
     try { localStorage.setItem(key, value); } catch (e) {}
   }
 
-  // ---------- Theme and mode (mirrors Settings → Appearance) ----------
+  // ---------- Light or dark ----------
   function isDark() {
     var mode = root.dataset.mode;
     if (mode === "system") return !window.matchMedia("(prefers-color-scheme: light)").matches;
     return mode !== "light";
   }
 
-  function refreshControls() {
-    document.querySelectorAll("[data-theme-btn]").forEach(function (b) {
-      b.setAttribute("aria-checked", String(b.dataset.themeBtn === root.dataset.theme));
-    });
-    document.querySelectorAll("[data-mode-btn]").forEach(function (b) {
-      b.setAttribute("aria-checked", String(b.dataset.modeBtn === root.dataset.mode));
-    });
-    // Keep the browser's UI colour in step with the page.
+  // Keep the browser's UI colour in step with the page.
+  function syncThemeColor() {
     var meta = document.querySelector('meta[name="theme-color"]');
     if (meta) meta.content = getComputedStyle(document.body).backgroundColor;
   }
 
-  function setTheme(key) {
-    root.dataset.theme = key;
-    save("mooxr-site-theme", key);
-    refreshControls();
-  }
-
-  function setMode(mode) {
-    root.dataset.mode = mode;
-    save("mooxr-site-mode", mode);
-    refreshControls();
-  }
-
-  document.querySelectorAll("[data-theme-btn]").forEach(function (b) {
-    b.addEventListener("click", function () { setTheme(b.dataset.themeBtn); });
-  });
-  document.querySelectorAll("[data-mode-btn]").forEach(function (b) {
-    b.addEventListener("click", function () { setMode(b.dataset.modeBtn); });
-  });
   document.getElementById("mode-toggle").addEventListener("click", function () {
-    setMode(isDark() ? "light" : "dark");
+    root.dataset.mode = isDark() ? "light" : "dark";
+    save("mooxr-site-mode", root.dataset.mode);
+    syncThemeColor();
   });
-  window.matchMedia("(prefers-color-scheme: light)").addEventListener("change", refreshControls);
+  window.matchMedia("(prefers-color-scheme: light)").addEventListener("change", syncThemeColor);
   // Wait a frame so the colour transition has a value to read.
-  requestAnimationFrame(refreshControls);
+  requestAnimationFrame(syncThemeColor);
 
   // ---------- Nav ----------
   var nav = document.querySelector(".nav");
@@ -95,7 +73,7 @@
 
   // ---------- Hero demo: three rows moox one after another ----------
   var win = document.querySelector(".window");
-  if (!win) return;  // pages without the demo, like the privacy policy
+  if (!win) return;  // pages without the demo, like the FAQ and privacy policy
   var rows = Array.prototype.slice.call(document.querySelectorAll("[data-row]"));
   var label = document.getElementById("moox-label");
   var stages = [
