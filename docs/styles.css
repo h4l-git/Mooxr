@@ -317,19 +317,11 @@ h2 { font-size: clamp(32px, 4.2vw, 50px); font-weight: 900; }
 }
 .section.alt .card { background: var(--bg); }
 
-/* Steps */
-.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; list-style: none; margin: 0; padding: 0; }
-.step { padding: 30px; position: relative; }
-.step:hover, .feature:hover { border-color: color-mix(in srgb, var(--accent) 55%, var(--border)); transform: translateY(-3px); }
-.step-num {
-  display: grid; place-items: center;
-  width: 44px; height: 44px; border-radius: 14px;
-  background: var(--grad); color: var(--ink);
-  font-weight: 900; font-size: 20px; margin-bottom: 22px;
-}
-.step h3, .feature h3 { font-size: 21px; font-weight: 800; margin-bottom: 10px; }
-.step p, .feature p { color: var(--muted); }
-.step b, .feature b { color: var(--text); }
+/* Feature cards */
+.feature:hover { border-color: color-mix(in srgb, var(--accent) 55%, var(--border)); transform: translateY(-3px); }
+.feature h3 { font-size: 21px; font-weight: 800; margin-bottom: 10px; }
+.feature p { color: var(--muted); }
+.feature b { color: var(--text); }
 
 /* Split layout */
 .split { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
@@ -641,7 +633,7 @@ h2 { font-size: clamp(32px, 4.2vw, 50px); font-weight: 900; }
 @media (max-width: 680px) {
   body { font-size: 16px; }
   .section { padding: 72px 0; }
-  .steps, .features { grid-template-columns: 1fr; }
+  .features { grid-template-columns: 1fr; }
   .ux-stage { padding: 16px 12px; border-radius: 18px; }
   .ux-body { padding: 12px; }
   .ux-sub, .ux-byline, .ux-hide-sm, .ux-drop > span:not(.ux-btn), .ux-drop .ux-btn { display: none; }
