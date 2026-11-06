@@ -11,10 +11,11 @@ appear there complete and tagged, the same way moox() saves (a hidden
 ".part" file renamed into place), so Spotify never sees half a file.
 
     from mooxr.library import list_tracks, send_to
-    tracks = list_tracks(Path.home() / "Music" / "Mooxed")
-    send_to([t.path for t in tracks], Path.home() / "Music" / "Spotify")
+    spotify = Path.home() / "Music" / "Spotify"  # where Mooxr saves by default
+    tracks = list_tracks(spotify)
+    send_to([t.path for t in list_tracks(other_save_folder)], spotify)  # only if Save to was changed
     edit_track(tracks[0].path, title="New Name", artist="Band", cover="art.png")
-    delete_track(tracks[0].path, Path.home() / "Music" / "Spotify")
+    delete_track(tracks[0].path, spotify)
     mooxed_index(folder).get(source_key("https://youtu.be/..."))  # mooxed before?
 """
 

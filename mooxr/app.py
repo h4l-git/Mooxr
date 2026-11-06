@@ -1013,6 +1013,23 @@ def reveal(path: Path) -> None:
         QDesktopServices.openUrl(QUrl.fromLocalFile(str(path.parent if path.is_file() else path)))
 
 
+AUTHOR_SITE = "https://h4l-git.github.io/"
+
+
+class BylineLabel(QLabel):
+    """The "By h4l.dev" credit; clicking it opens the author's website."""
+
+    def __init__(self, text: str) -> None:
+        super().__init__(text)
+        self.setCursor(Qt.CursorShape.PointingHandCursor)
+        self.setToolTip(AUTHOR_SITE)
+
+    def mouseReleaseEvent(self, event) -> None:
+        if event.button() == Qt.MouseButton.LeftButton and self.rect().contains(event.position().toPoint()):
+            QDesktopServices.openUrl(QUrl(AUTHOR_SITE))
+        super().mouseReleaseEvent(event)
+
+
 # --------------------------------------------------------------------------
 # Window
 # --------------------------------------------------------------------------
@@ -1067,7 +1084,7 @@ class Window(QMainWindow):
         self.logo.setObjectName("title")
         subtitle = QLabel("Video in, tagged MP3 out - ready for Spotify Local Files.")
         subtitle.setObjectName("subtitle")
-        byline = QLabel("By h4l.dev")
+        byline = BylineLabel("By h4l.dev")
         byline.setObjectName("byline")
         brand = QHBoxLayout()
         brand.setSpacing(8)

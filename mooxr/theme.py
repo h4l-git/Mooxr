@@ -122,6 +122,7 @@ def stylesheet(c: Dict[str, str]) -> str:
     #title {{ font-size: 20pt; font-weight: 700; }}
     #subtitle, #byline, *[muted="true"] {{ color: {c['muted']}; }}
     #byline {{ font-size: 8pt; }}
+    #byline:hover {{ color: {c['text']}; }}
     #drop {{
         background: {c['surface']}; border: 2px dashed {c['border']}; border-radius: 18px;
     }}

@@ -73,7 +73,8 @@ def main() -> int:
         # yt-dlp and all its site extractors go in.
         "--collect-submodules", "yt_dlp",
         # Qt pieces Mooxr never uses; leaving them out keeps the exe small.
-        *[arg for mod in ("PyQt6.QtNetwork", "PyQt6.QtQml", "PyQt6.QtQuick", "PyQt6.QtPdf",
+        # (Not QtNetwork: app.py uses it to keep to one window.)
+        *[arg for mod in ("PyQt6.QtQml", "PyQt6.QtQuick", "PyQt6.QtPdf",
                           "PyQt6.QtMultimedia", "PyQt6.QtWebEngineCore", "tkinter", "pytest")
           for arg in ("--exclude-module", mod)],
         "--distpath", str(HERE / "dist"),
