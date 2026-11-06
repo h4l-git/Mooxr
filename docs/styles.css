@@ -98,7 +98,6 @@ code, kbd {
 .wrap { width: min(1160px, 100% - 32px); margin-inline: auto; }
 .wrap.narrow { width: min(760px, 100% - 32px); }
 .muted { color: var(--muted); }
-.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 a.inline { color: var(--strong); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
 .grad-text {
   background: var(--grad);
@@ -396,35 +395,132 @@ h2 { font-size: clamp(32px, 4.2vw, 50px); font-weight: 900; }
 .f-icon svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 .feature s { color: var(--muted); text-decoration-color: color-mix(in srgb, #FF7B7B 80%, transparent); text-decoration-thickness: 2px; }
 
-/* App vs extension */
-.compare { padding: 8px 28px; overflow: hidden; max-width: 980px; margin-inline: auto; }
-.compare table { width: 100%; border-collapse: collapse; table-layout: fixed; }
-.compare col.c-what { width: 44%; }
-.compare th, .compare td { padding: 16px 12px; text-align: left; vertical-align: middle; border-bottom: 1px solid var(--border); }
-.compare tbody tr:last-child th, .compare tbody tr:last-child td { border-bottom: none; }
-.compare tbody th { font-weight: 700; }
-.compare td small { display: block; margin-top: 6px; color: var(--muted); font-size: 13.5px; line-height: 1.35; }
-.compare td small kbd { font-size: 12px; }
-.compare thead th { padding-block: 22px 18px; vertical-align: top; }
+/* App vs extension: the two screens side by side */
+.ux-duo { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 28px; }
+.ux-side { margin: 0; display: grid; grid-template-rows: auto 1fr auto; gap: 22px; min-width: 0; }
+.ux-side .ticks { margin: 0; gap: 10px; }
 .c-head { display: flex; align-items: center; gap: 12px; }
-.c-head b { display: block; font-size: 18px; font-weight: 800; line-height: 1.2; }
-.c-head small { display: block; color: var(--muted); font-size: 13.5px; font-weight: 600; }
+.c-head b { display: block; font-size: 20px; font-weight: 800; line-height: 1.2; }
+.c-head small { display: block; color: var(--muted); font-size: 14px; font-weight: 600; }
 .c-icon {
   flex: none; display: grid; place-items: center;
-  width: 42px; height: 42px; border-radius: 13px;
+  width: 44px; height: 44px; border-radius: 14px;
   background: var(--drop); color: var(--strong);
   border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
 }
-.c-icon svg { width: 21px; height: 21px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-.yes, .no { position: relative; display: inline-block; width: 24px; height: 24px; border-radius: 8px; vertical-align: middle; }
-.yes { background: var(--grad); }
-.yes::after {
-  content: ""; position: absolute; left: 8px; top: 8px; width: 8px; height: 5px;
-  border-left: 2.4px solid var(--ink); border-bottom: 2.4px solid var(--ink); transform: rotate(-45deg);
+.c-icon svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+/* The stage each screen sits on */
+.ux-stage {
+  display: grid; grid-template-columns: minmax(0, 1fr); align-items: start; justify-items: center;
+  padding: 28px; border-radius: 22px; overflow: hidden;
+  background: radial-gradient(120% 80% at 50% 0%, var(--glow-a), transparent 65%), var(--bg);
+  border: 1px solid var(--border);
 }
-.no { background: var(--raised); border: 1px solid var(--border); }
-.no::after { content: ""; position: absolute; left: 7px; right: 7px; top: 50%; height: 2.2px; margin-top: -1.1px; border-radius: 2px; background: var(--muted); }
-#compare .cta-row { margin-top: 40px; }
+
+/* Shared bits of both mock-ups */
+.ux-app, .ux-pop { font-size: 12px; line-height: 1.4; color: var(--text); text-align: left; }
+/* Let the grids inside shrink below their longest line, so text truncates instead of widening the page. */
+.ux-body, .ux-row, .ux-pop, .ux-card, .ux-side { grid-template-columns: minmax(0, 1fr); }
+.ux-btn {
+  flex: none; display: inline-block; padding: 3px 11px; border-radius: 13px;
+  background: var(--raised); border: 1px solid var(--border);
+  font-size: 11px; font-weight: 600; white-space: nowrap;
+}
+.ux-btn.sm { padding: 2px 10px; font-size: 10.5px; }
+.ux-input {
+  display: block; min-width: 0; padding: 4px 9px; border-radius: 8px;
+  background: var(--bg); border: 1px solid var(--border); color: var(--muted);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.ux-input.set { color: var(--text); }
+.ux-moox { display: inline-flex; flex: none; }
+.ux-moox-main { background: var(--grad); color: var(--ink); font-weight: 800; font-size: 13px; padding: 6px 14px 6px 20px; border-radius: 16px 0 0 16px; }
+.ux-moox-send {
+  display: flex; align-items: center; gap: 5px; padding: 0 11px 0 9px;
+  background: var(--raised); border: 1px solid var(--border); border-left: none; border-radius: 0 16px 16px 0;
+  font-size: 11px; font-weight: 600;
+}
+.ux-moox-send svg { width: 10px; height: 10px; fill: none; stroke: var(--muted); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+
+/* Desktop window */
+.ux-app { width: 100%; max-width: 600px; background: var(--bg); border-radius: 12px; box-shadow: var(--shadow); overflow: hidden; }
+.ux-body { padding: 16px 18px; display: grid; gap: 10px; }
+.ux-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+.ux-brand { display: flex; align-items: flex-end; gap: 7px; }
+.ux-brand .wordmark { height: 24px; }
+.ux-byline { font-size: 9.5px; color: var(--muted); padding-bottom: 2px; }
+.ux-sub { color: var(--muted); font-size: 11px; margin-top: 3px; }
+.ux-drop {
+  display: flex; justify-content: center; align-items: center; gap: 8px;
+  padding: 10px; border: 2px dashed var(--border); border-radius: 12px; background: var(--surface);
+  font-weight: 700; font-size: 12.5px;
+}
+.ux-drop > span:not(.ux-btn) { color: var(--muted); font-weight: 500; }
+.ux-line { display: flex; align-items: center; gap: 8px; }
+.ux-line .ux-input { flex: 1; background: var(--surface); }
+.ux-row { display: grid; gap: 7px; padding: 9px 10px 10px 12px; border-radius: 11px; background: var(--surface); border: 1px solid var(--border); }
+.ux-row-top { display: flex; align-items: center; gap: 7px; font-weight: 700; }
+.ux-kind { flex: none; width: 14px; height: 14px; fill: none; stroke: var(--muted); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.ux-name { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ux-x { color: var(--muted); font-size: 11px; }
+.ux-fields { display: grid; grid-template-columns: 3fr 2fr; gap: 6px; }
+.ux-field {
+  padding: 3px 8px; border-radius: 7px; background: var(--bg); border: 1px solid var(--border);
+  color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.ux-field.set { color: var(--text); }
+.ux-status { display: flex; justify-content: space-between; align-items: center; gap: 8px; color: var(--muted); font-size: 11px; }
+.ux-status.good > span:first-child { color: var(--good); font-weight: 700; }
+.ux-bar { height: 5px; border-radius: 3px; background: var(--raised); overflow: hidden; }
+.ux-bar span { display: block; height: 100%; border-radius: 3px; background: var(--grad); }
+.ux-foot { display: flex; align-items: center; gap: 8px; color: var(--muted); }
+.ux-foot b { flex: 1; min-width: 0; color: var(--text); font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ux-actions { display: flex; align-items: center; gap: 8px; }
+.ux-actions .ux-moox { margin-left: auto; }
+
+/* Chrome toolbar and popup */
+.ux-chrome { width: 100%; max-width: 380px; }
+.ux-tool {
+  display: flex; align-items: center; gap: 10px; padding: 8px 10px;
+  background: var(--raised); border: 1px solid var(--border); border-radius: 12px;
+}
+.ux-url { flex: 1; min-width: 0; padding: 4px 12px; border-radius: 999px; background: var(--bg); color: var(--muted); font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ux-ext { position: relative; flex: none; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 8px; background: var(--drop); box-shadow: 0 0 0 1.5px var(--accent); }
+.ux-ext svg { width: 20px; height: 20px; }
+.ux-dot { position: absolute; top: 2px; right: 2px; width: 7px; height: 7px; border-radius: 50%; background: #FFC66B; box-shadow: 0 0 0 2px var(--raised); }
+.ux-pop {
+  position: relative; display: grid; gap: 10px; margin: 12px 0 0 auto; width: min(340px, 100%);
+  padding: 12px 13px 10px; border-radius: 14px; background: var(--bg); border: 1px solid var(--border);
+  box-shadow: 0 24px 50px -16px rgb(0 0 0 / .55);
+}
+.ux-pop::before {
+  content: ""; position: absolute; top: -7px; right: 18px; width: 12px; height: 12px;
+  background: var(--bg); border-left: 1px solid var(--border); border-top: 1px solid var(--border); transform: rotate(45deg);
+}
+.ux-pop-head { display: flex; justify-content: space-between; align-items: center; }
+.ux-pop-head .wordmark { height: 24px; }
+.ux-gear { width: 16px; height: 16px; fill: none; stroke: var(--muted); stroke-width: 2; }
+.ux-card { display: grid; gap: 8px; padding: 10px; border-radius: 12px; background: var(--surface); border: 1px solid var(--border); }
+.ux-src { display: flex; align-items: center; gap: 10px; margin-bottom: 2px; }
+.ux-art { position: relative; flex: none; width: 54px; height: 54px; border-radius: 9px; }
+.ux-art::after { content: "♪"; position: absolute; inset: 0; display: grid; place-items: center; color: rgb(255 255 255 / .8); font-size: 18px; }
+.ux-src-text { min-width: 0; display: grid; justify-items: start; gap: 1px; }
+.ux-src-text b { font-size: 12.5px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.ux-src-text small { color: var(--muted); font-size: 11px; margin-bottom: 4px; }
+.ux-label { display: block; font-size: 10px; font-weight: 700; color: var(--muted); padding-left: 2px; margin-bottom: 2px; }
+.ux-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
+.ux-center { display: flex; justify-content: center; margin-top: 2px; }
+.ux-qhead { display: flex; justify-content: space-between; align-items: baseline; padding: 0 2px; }
+.ux-qhead span { color: var(--muted); font-size: 11px; font-weight: 600; }
+.ux-qrow { display: flex; align-items: center; gap: 8px; padding: 7px 9px 7px 11px; border-radius: 11px; background: var(--surface); border: 1px solid var(--border); }
+.ux-qmain { flex: 1; min-width: 0; display: grid; }
+.ux-qmain span { color: var(--good); font-size: 11px; }
+.ux-pop-foot { color: var(--muted); font-size: 10.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+.ux-same { max-width: 46em; margin: 44px auto 0; text-align: center; color: var(--muted); }
+.ux-same b { color: var(--text); }
+#compare .cta-row { margin-top: 28px; }
 
 /* Spotify setup */
 .setup { display: grid; grid-template-columns: 1fr 1.1fr; gap: 48px; padding: 48px; align-items: center; }
@@ -436,6 +532,7 @@ h2 { font-size: clamp(32px, 4.2vw, 50px); font-weight: 900; }
   counter-increment: s; display: flex; align-items: center; gap: 14px;
   padding: 14px 16px; border-radius: 14px; background: var(--bg); border: 1px solid var(--border);
 }
+.setup-steps li > span { min-width: 0; }
 .setup-steps li::before {
   content: counter(s); flex: none; display: grid; place-items: center;
   width: 30px; height: 30px; border-radius: 50%;
@@ -519,6 +616,8 @@ h2 { font-size: clamp(32px, 4.2vw, 50px); font-weight: 900; }
 /* ---------- Responsive ---------- */
 @media (max-width: 980px) {
   .hero-grid, .split, .setup { grid-template-columns: 1fr; }
+  .ux-duo { grid-template-columns: minmax(0, 1fr); }
+  .ux-duo { gap: 64px; }
   .hero { padding: 48px 0 64px; }
   .window { transform: none; max-width: 600px; }
   .window:hover { transform: none; }
@@ -543,14 +642,10 @@ h2 { font-size: clamp(32px, 4.2vw, 50px); font-weight: 900; }
   body { font-size: 16px; }
   .section { padding: 72px 0; }
   .steps, .features { grid-template-columns: 1fr; }
-  .compare { padding: 0 6px; border-radius: 16px; }
-  .compare col.c-what { width: 38%; }
-  .compare th, .compare td { padding: 14px 8px; font-size: 14.5px; }
-  .compare td small { font-size: 12px; }
-  .c-head { flex-direction: column; align-items: flex-start; gap: 8px; }
-  .c-head b { font-size: 15px; }
-  .c-head small { font-size: 12px; }
-  .c-icon { width: 36px; height: 36px; border-radius: 11px; }
+  .ux-stage { padding: 16px 12px; border-radius: 18px; }
+  .ux-body { padding: 12px; }
+  .ux-sub, .ux-byline, .ux-hide-sm, .ux-drop > span:not(.ux-btn), .ux-drop .ux-btn { display: none; }
+  .ux-fields { grid-template-columns: 1fr 1fr; }
   .lede { font-size: 18px; }
   .nav-actions .btn-sm { display: none; }
   .win-body { padding: 14px; }

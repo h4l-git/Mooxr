@@ -272,94 +272,138 @@
   <div class="wrap">
     <div class="section-head reveal">
       <p class="kicker">App or extension</p>
-      <h2>Which one do I need?</h2>
-      <p class="lede sm center">The app does the converting. The extension is a shortcut to it from Chrome. Start with the app, add the extension if you find music while browsing.</p>
+      <h2>Two ways in. Same MP3 out.</h2>
+      <p class="lede sm center">The window is home base for files, batches and your library. The extension mooxes the page you&rsquo;re watching without leaving Chrome.</p>
     </div>
 
-    <div class="compare card reveal">
-      <table>
-        <colgroup><col class="c-what"><col><col></colgroup>
-        <thead>
-          <tr>
-            <th scope="col"><span class="sr">Feature</span></th>
-            <th scope="col">
-              <span class="c-head">
-                <span class="c-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="2.5"/><path d="M8 21h8M12 17v4"/></svg></span>
-                <span><b>Desktop app</b><small>Windows</small></span>
+    <div class="ux-duo">
+      <!-- Desktop app -->
+      <figure class="ux-side reveal">
+        <figcaption class="c-head">
+          <span class="c-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="2.5"/><path d="M8 21h8M12 17v4"/></svg></span>
+          <span><b>Desktop app</b><small>Windows</small></span>
+        </figcaption>
+        <div class="ux-stage">
+          <div class="ux-app" role="img" aria-label="The Mooxr window with two tracks in the queue: one done and in Spotify, one converting">
+            <div class="win-bar">
+              <span class="win-title">Mooxr</span>
+              <span class="win-ctrls" aria-hidden="true"><i></i><i></i><i></i></span>
+            </div>
+            <div class="ux-body">
+              <div class="ux-head">
+                <div>
+                  <div class="ux-brand">
+                    <svg class="wordmark" viewBox="0 0 470 140" aria-hidden="true"><defs><linearGradient id="g-ux-app" x1="130" y1="0" x2="310" y2="130" gradientUnits="userSpaceOnUse"><stop offset="0" class="stop-from"/><stop offset="1" class="stop-to"/></linearGradient></defs><g transform="translate(12 6)"><g class="letters" fill="none" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"><path d="M20 120V80a20 20 0 0 1 40 0v40M60 80a20 20 0 0 1 40 0v40"/><path d="M333 60l48 60M381 60l-48 60"/><path d="M408 120V90a30 30 0 0 1 30-30h4"/></g><g fill="none" stroke="url(#g-ux-app)" stroke-linecap="round"><path d="M132 88V84A87.0 74.82 0 0 1 306 84v4" stroke-width="10"/><circle cx="170" cy="90" r="30" stroke-width="14"/><circle cx="268" cy="90" r="30" stroke-width="14"/><path d="M142.1 109.5A34 34 0 0 1 142.1 70.5" stroke-width="22"/><path d="M295.9 70.5A34 34 0 0 1 295.9 109.5" stroke-width="22"/></g></g></svg>
+                    <span class="ux-byline">By h4l.dev</span>
+                  </div>
+                  <div class="ux-sub">Video in, tagged MP3 out - ready for Spotify Local Files.</div>
+                </div>
+                <span class="ux-btn">Settings</span>
+              </div>
+
+              <div class="ux-drop">Drop more videos here <span>or</span> <span class="ux-btn">Choose files…</span></div>
+
+              <div class="ux-line">
+                <span class="ux-input">…or paste a link (YouTube, SoundCloud, Bandcamp…) and press Enter</span>
+                <span class="ux-btn">Add link</span>
+              </div>
+
+              <div class="ux-row">
+                <div class="ux-row-top">
+                  <svg class="ux-kind" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M7 5v14M17 5v14M3 9.5h4M3 14.5h4M17 9.5h4M17 14.5h4"/></svg>
+                  <span class="ux-name">My Band - First Song.mp4</span>
+                  <span class="ux-x">✕</span>
+                </div>
+                <div class="ux-fields"><span class="ux-field set">First Song</span><span class="ux-field set">My Band</span></div>
+                <div class="ux-status good"><span>Done · in Spotify</span><span class="ux-btn">Show in folder</span></div>
+              </div>
+
+              <div class="ux-row">
+                <div class="ux-row-top">
+                  <svg class="ux-kind" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4.5 4.5 0 0 0 6.4 0l3-3a4.5 4.5 0 0 0-6.4-6.4l-1.2 1.2"/><path d="M14 10a4.5 4.5 0 0 0-6.4 0l-3 3a4.5 4.5 0 0 0 6.4 6.4l1.2-1.2"/></svg>
+                  <span class="ux-name">youtube.com/watch?v=…</span>
+                  <span class="ux-x">✕</span>
+                </div>
+                <div class="ux-fields"><span class="ux-field">Title: Midnight Drive</span><span class="ux-field">Artist: Neon Harbour</span></div>
+                <div class="ux-status"><span>Converting… 64%</span><span class="ux-btn">Cancel</span></div>
+                <div class="ux-bar"><span style="width:64%"></span></div>
+              </div>
+
+              <div class="ux-foot">
+                <span>Save to:</span><b>C:\Users\you\Music\Spotify</b>
+                <span class="ux-btn">Change…</span><span class="ux-btn ux-hide-sm">Open folder</span>
+              </div>
+              <div class="ux-actions">
+                <span class="ux-btn ux-hide-sm">Clear finished</span>
+                <span class="ux-btn">Mooxed files</span>
+                <span class="ux-moox"><span class="ux-moox-main">Moox</span><span class="ux-moox-send">to <img src="assets/services/spotify.svg" alt="" width="14" height="14"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5"/></svg></span></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <ul class="ticks">
+          <li>Drop in video files, whole folders or links</li>
+          <li>Check the tags and cover for a whole batch</li>
+          <li>Mooxed files library to retag tracks later</li>
+        </ul>
+      </figure>
+
+      <!-- Chrome extension -->
+      <figure class="ux-side reveal">
+        <figcaption class="c-head">
+          <span class="c-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.5"/><path d="M12 8.5h8.5M9 13.8L4.8 6.4M15 13.8l-4.3 7.4"/></svg></span>
+          <span><b>Chrome extension</b><small>Chrome, Edge, Brave</small></span>
+        </figcaption>
+        <div class="ux-stage">
+          <div class="ux-chrome" role="img" aria-label="The Mooxr extension popup open over a YouTube video, ready to moox it to Spotify">
+            <div class="ux-tool">
+              <span class="ux-url">youtube.com/watch?v=…</span>
+              <span class="ux-ext">
+                <svg viewBox="0 0 256 256" aria-hidden="true"><defs><linearGradient id="g-ux-ext" x1="30" y1="40" x2="226" y2="220" gradientUnits="userSpaceOnUse"><stop offset="0" class="stop-from"/><stop offset="1" class="stop-to"/></linearGradient></defs><g fill="none" stroke="url(#g-ux-ext)" stroke-linecap="round"><path d="M41 152V148A87.0 74.82 0 0 1 215 148v4" stroke-width="13"/><circle cx="80" cy="154" r="31" stroke-width="17"/><circle cx="176" cy="154" r="31" stroke-width="17"/><path d="M51.3 174.1A35 35 0 0 1 51.3 133.9" stroke-width="26"/><path d="M204.7 133.9A35 35 0 0 1 204.7 174.1" stroke-width="26"/></g></svg>
+                <i class="ux-dot"></i>
               </span>
-            </th>
-            <th scope="col">
-              <span class="c-head">
-                <span class="c-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.5"/><path d="M12 8.5h8.5M9 13.8L4.8 6.4M15 13.8l-4.3 7.4"/></svg></span>
-                <span><b>Chrome extension</b><small>Chrome, Edge, Brave</small></span>
-              </span>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">Makes the tagged 320&nbsp;kbps MP3</th>
-            <td><span class="yes"><span class="sr">Yes</span></span></td>
-            <td><span class="yes"><span class="sr">Yes</span></span><small>Through the app</small></td>
-          </tr>
-          <tr>
-            <th scope="row">Works on its own</th>
-            <td><span class="yes"><span class="sr">Yes</span></span></td>
-            <td><span class="no"><span class="sr">No</span></span><small>Needs the app on the same PC</small></td>
-          </tr>
-          <tr>
-            <th scope="row">Paste a link</th>
-            <td><span class="yes"><span class="sr">Yes</span></span></td>
-            <td><span class="yes"><span class="sr">Yes</span></span></td>
-          </tr>
-          <tr>
-            <th scope="row">Video files and whole folders from your PC</th>
-            <td><span class="yes"><span class="sr">Yes</span></span><small>Drag and drop</small></td>
-            <td><span class="no"><span class="sr">No</span></span></td>
-          </tr>
-          <tr>
-            <th scope="row">Moox the page you&rsquo;re on</th>
-            <td><span class="no"><span class="sr">No</span></span><small>Copy the link across</small></td>
-            <td><span class="yes"><span class="sr">Yes</span></span><small>Toolbar button or <kbd>Alt</kbd>+<kbd>M</kbd></small></td>
-          </tr>
-          <tr>
-            <th scope="row">Right-click &ldquo;Moox this link&rdquo;</th>
-            <td><span class="no"><span class="sr">No</span></span></td>
-            <td><span class="yes"><span class="sr">Yes</span></span></td>
-          </tr>
-          <tr>
-            <th scope="row">Spots songs as you browse</th>
-            <td><span class="no"><span class="sr">No</span></span></td>
-            <td><span class="yes"><span class="sr">Yes</span></span><small>A dot on the toolbar button</small></td>
-          </tr>
-          <tr>
-            <th scope="row">Edit title, artist and cover first</th>
-            <td><span class="yes"><span class="sr">Yes</span></span></td>
-            <td><span class="yes"><span class="sr">Yes</span></span></td>
-          </tr>
-          <tr>
-            <th scope="row">Send to Spotify, Apple Music and more</th>
-            <td><span class="yes"><span class="sr">Yes</span></span></td>
-            <td><span class="yes"><span class="sr">Yes</span></span></td>
-          </tr>
-          <tr>
-            <th scope="row">Queue that runs in the background</th>
-            <td><span class="yes"><span class="sr">Yes</span></span></td>
-            <td><span class="yes"><span class="sr">Yes</span></span><small>Tells you when each is done</small></td>
-          </tr>
-          <tr>
-            <th scope="row">Warns about repeats</th>
-            <td><span class="yes"><span class="sr">Yes</span></span></td>
-            <td><span class="yes"><span class="sr">Yes</span></span></td>
-          </tr>
-          <tr>
-            <th scope="row">Mooxed files library</th>
-            <td><span class="yes"><span class="sr">Yes</span></span><small>Search, retag, swap covers</small></td>
-            <td><span class="no"><span class="sr">No</span></span></td>
-          </tr>
-        </tbody>
-      </table>
+            </div>
+            <div class="ux-pop">
+              <div class="ux-pop-head">
+                <svg class="wordmark" viewBox="0 0 470 140" aria-hidden="true"><defs><linearGradient id="g-ux-pop" x1="130" y1="0" x2="310" y2="130" gradientUnits="userSpaceOnUse"><stop offset="0" class="stop-from"/><stop offset="1" class="stop-to"/></linearGradient></defs><g transform="translate(12 6)"><g class="letters" fill="none" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"><path d="M20 120V80a20 20 0 0 1 40 0v40M60 80a20 20 0 0 1 40 0v40"/><path d="M333 60l48 60M381 60l-48 60"/><path d="M408 120V90a30 30 0 0 1 30-30h4"/></g><g fill="none" stroke="url(#g-ux-pop)" stroke-linecap="round"><path d="M132 88V84A87.0 74.82 0 0 1 306 84v4" stroke-width="10"/><circle cx="170" cy="90" r="30" stroke-width="14"/><circle cx="268" cy="90" r="30" stroke-width="14"/><path d="M142.1 109.5A34 34 0 0 1 142.1 70.5" stroke-width="22"/><path d="M295.9 70.5A34 34 0 0 1 295.9 109.5" stroke-width="22"/></g></g></svg>
+                <svg class="ux-gear" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12.2 2h-.4a2 2 0 0 0-2 2v.2a2 2 0 0 1-1 1.7l-.4.2a2 2 0 0 1-2 0l-.2-.1a2 2 0 0 0-2.7.7l-.2.4a2 2 0 0 0 .7 2.7l.2.1a2 2 0 0 1 1 1.7v.5a2 2 0 0 1-1 1.8l-.2.1a2 2 0 0 0-.7 2.7l.2.4a2 2 0 0 0 2.7.7l.2-.1a2 2 0 0 1 2 0l.4.3a2 2 0 0 1 1 1.7v.2a2 2 0 0 0 2 2h.4a2 2 0 0 0 2-2v-.2a2 2 0 0 1 1-1.7l.4-.3a2 2 0 0 1 2 0l.2.1a2 2 0 0 0 2.7-.7l.2-.4a2 2 0 0 0-.7-2.7l-.2-.1a2 2 0 0 1-1-1.8v-.5a2 2 0 0 1 1-1.7l.2-.1a2 2 0 0 0 .7-2.7l-.2-.4a2 2 0 0 0-2.7-.7l-.2.1a2 2 0 0 1-2 0l-.4-.2a2 2 0 0 1-1-1.7V4a2 2 0 0 0-2-2z"/></svg>
+              </div>
+              <div class="ux-card">
+                <div class="ux-src">
+                  <span class="ux-art c1"></span>
+                  <span class="ux-src-text">
+                    <b>Neon Harbour - Midnight Drive (Official Video)</b>
+                    <small>youtube.com</small>
+                    <span class="ux-btn sm">Change cover</span>
+                  </span>
+                </div>
+                <div><span class="ux-label">Link</span><span class="ux-input">https://youtube.com/watch?v=…</span></div>
+                <div class="ux-pair">
+                  <div><span class="ux-label">Title</span><span class="ux-input set">Midnight Drive</span></div>
+                  <div><span class="ux-label">Artist</span><span class="ux-input set">Neon Harbour</span></div>
+                </div>
+                <div class="ux-center">
+                  <span class="ux-moox"><span class="ux-moox-main">Moox</span><span class="ux-moox-send">to <img src="assets/services/spotify.svg" alt="" width="14" height="14"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5"/></svg></span></span>
+                </div>
+              </div>
+              <div class="ux-qhead"><b>Mooxed here</b><span>Clear finished</span></div>
+              <div class="ux-qrow">
+                <span class="ux-qmain"><b>Summer Set</b><span>Done · in Spotify</span></span>
+                <span class="ux-btn sm">Show</span>
+              </div>
+              <div class="ux-pop-foot">Saves to C:\Users\you\Music\Spotify</div>
+            </div>
+          </div>
+        </div>
+        <ul class="ticks">
+          <li>Moox the page you&rsquo;re on: one click or <kbd>Alt</kbd>+<kbd>M</kbd></li>
+          <li>Right-click any link for &ldquo;Moox this link&rdquo;</li>
+          <li>A dot on the button when a page looks like a song</li>
+        </ul>
+      </figure>
     </div>
+
+    <p class="ux-same reveal">Same result either way. The extension hands the link to the app, so the tags, cover art, folders and settings all match. <b>It needs the app installed on the same PC.</b></p>
 
     <div class="cta-row center reveal">
       <a class="btn btn-primary" href="https://github.com/h4l-git/Mooxr/releases/latest">
@@ -382,10 +426,10 @@
         <p>Spotify doesn&rsquo;t let other apps hand it songs; it watches folders. Point it at Mooxr&rsquo;s folder once and every track appears by itself.</p>
       </div>
       <ol class="setup-steps">
-        <li>In Spotify, open <b>Settings → Your Library</b></li>
-        <li>Turn on <b>Show Local Files</b></li>
-        <li>Press <b>Add a source</b> and choose <code>Music\Spotify</code></li>
-        <li>Find your tracks under <b>Your Library → Local Files</b></li>
+        <li><span>In Spotify, open <b>Settings → Your Library</b></span></li>
+        <li><span>Turn on <b>Show Local Files</b></span></li>
+        <li><span>Press <b>Add a source</b> and choose <code>Music\Spotify</code></span></li>
+        <li><span>Find your tracks under <b>Your Library → Local Files</b></span></li>
       </ol>
     </div>
   </div>
